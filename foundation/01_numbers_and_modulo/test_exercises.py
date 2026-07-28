@@ -1,6 +1,12 @@
+import sys
 import unittest
+from pathlib import Path
 
-from exercises import (
+LESSON_DIRECTORY = Path(__file__).resolve().parent
+if str(LESSON_DIRECTORY) not in sys.path:
+    sys.path.insert(0, str(LESSON_DIRECTORY))
+
+from exercises import (  # noqa: E402
     circular_index,
     count_complete_groups,
     is_even,
@@ -29,4 +35,4 @@ class TestNumbersAndModulo(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(verbosity=2)
