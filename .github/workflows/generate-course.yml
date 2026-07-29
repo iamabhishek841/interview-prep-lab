@@ -2,7 +2,7 @@ name: Generate complete course
 
 on:
   push:
-    branches: [feat/complete-problem-bank]
+    branches: [main, feat/complete-problem-bank]
   workflow_dispatch:
 
 permissions:
