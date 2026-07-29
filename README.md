@@ -1,34 +1,22 @@
-# Math for Coding Interviews — Python
+# Google-Target Mathematics for Coding
 
-A focused offline course for Google-level interview preparation. It is not a school-maths syllabus and not a random collection of tricks. Each module contains:
+This repository is being rebuilt as a complete mathematics-for-coding interview course with 72 separate problems across 12 topic modules.
 
-- a substantial concept lesson;
-- exactly one consolidated coding problem;
-- a blank Python implementation;
-- 10–15 tests covering correctness, edge cases and performance-sensitive inputs;
-- a reference solution for review after a genuine attempt.
+Each exercise has its own folder containing:
+
+- `problem.md` with a full statement, function signature, constraints, examples, edge-case rules and interview discussion points;
+- `problem.py` with the starter function;
+- `test_problem.py` with 10 or more correctness, edge-case, immutability and performance-sensitive tests;
+- `reference_solution.py` for review after a genuine attempt.
 
 ## Workflow
 
-1. Read `lesson.md` completely and work through the derivations on paper.
-2. Open `problem.py` and implement only the requested function.
-3. Run `python -m pytest <module>/test_problem.py -q`.
-4. Analyse every failure before changing code.
-5. Compare with `reference_solution.py` only after passing or after a serious timed attempt.
+```bash
+pip install -r requirements.txt
+cd 02_gcd_lcm/04_lcm_of_array
+python -m pytest test_problem.py -q
+```
 
-## Curriculum
+Read the topic lesson first, implement only `problem.py`, run the tests, and inspect the reference solution only after solving or completing a serious timed attempt.
 
-1. Division, divisibility and modulo
-2. GCD, LCM and Euclidean algorithm
-3. Prime numbers and primality testing
-4. Prime factorisation and divisors
-5. Sieve of Eratosthenes
-6. Fast exponentiation
-7. Modular arithmetic
-8. Factorials and trailing zeroes
-9. Fibonacci and recurrences
-10. Permutations, combinations and nCr
-11. Sets, subsets and power sets
-12. Euler totient, modular inverse and CRT
-
-The questions are original practice problems inspired by standard mathematical-algorithm patterns commonly covered by GeeksforGeeks and competitive-programming references. Explanations and code are written specifically for this repository and are not copied article text.
+The topic coverage uses GeeksforGeeks mathematical-algorithm indexes as references. The repository's wording, test design and Python implementations are original study material.
