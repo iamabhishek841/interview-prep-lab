@@ -1,0 +1,34 @@
+name: Generate complete course
+
+on:
+  push:
+    branches: [feat/complete-problem-bank]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    if: ${{ !contains(github.event.head_commit.message, '[generated-course]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate 72 problem folders
+        run: python tools/build_course.py
+      - name: Commit generated curriculum
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+          else
+            git commit -m "build: materialize 72-problem curriculum [generated-course]"
+            git push
+          fi
