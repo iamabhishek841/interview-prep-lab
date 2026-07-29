@@ -2,7 +2,10 @@ name: Generate complete course
 
 on:
   push:
-    branches: [main, feat/complete-problem-bank]
+    branches: [main]
+    paths:
+      - "tools/**"
+      - ".github/workflows/generate-course.yml"
   workflow_dispatch:
 
 permissions:
@@ -18,9 +21,18 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
+      - name: Validate generator syntax
+        run: python -m py_compile tools/build_course.py tools/materialize_course.py
       - name: Generate 72 problem folders
-        run: python tools/build_course.py
+        run: python tools/materialize_course.py
+      - name: Validate generated structure
+        run: |
+          test "$(find . -name problem.md | wc -l)" -eq 72
+          test "$(find . -name problem.py | wc -l)" -eq 72
+          test "$(find . -name test_problem.py | wc -l)" -eq 72
+          test "$(find . -name reference_solution.py | wc -l)" -eq 72
+          python -m compileall -q _shared 0*_*/ 1*_*/
       - name: Commit generated curriculum
         run: |
           git config user.name "github-actions[bot]"
